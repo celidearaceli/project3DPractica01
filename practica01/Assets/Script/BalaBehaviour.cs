@@ -9,5 +9,10 @@ public class BalaBehaviour : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speedZ * Time.deltaTime);
+        //Destruir balas
+        if (transform.position.z < -4.57f || transform.position.z > 4.44f)
+        {
+            Destroy(gameObject);
+        }
     }
 }

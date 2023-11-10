@@ -5,18 +5,16 @@ using UnityEngine;
 public class Generator01Behaviour : MonoBehaviour
 {
     [SerializeField] private GameObject enemy01;
+    [SerializeField] private float initTime;
+    [SerializeField] private float repeatTime;
     void Start()
     {
         
+        InvokeRepeating("EnemyGenerator", initTime, repeatTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnemyGenerator()
     {
-        
-    }
-    public void GenerarEnemigo()
-    {
-        
+        Instantiate(enemy01, transform.position, transform.rotation);
     }
 }

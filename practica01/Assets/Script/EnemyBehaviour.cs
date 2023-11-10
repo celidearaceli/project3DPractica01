@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float speedZ = 2f;
     [SerializeField] private int enemyType;
     private float speedXEnemy2 = 2f;
+    
     private float randomTime = 0;
 
     private void Start()
@@ -51,15 +52,20 @@ public class EnemyBehaviour : MonoBehaviour
             case 1:
             {
                 transform.Translate(speedX * Time.deltaTime, 0, speedZ * Time.deltaTime);
+                //Los Enemigo01, al cruzar el plano son destruidos
+                if (transform.position.z > 4.74f || transform.position.x < - 4.63f)
+                {
+                    Destroy(gameObject);
+                }
                 break;
             }
             case 2:
             {
-                if(transform.position.x < -4.33f || transform.position.x > 4.45f)
+                if(transform.position.x < -4.39f || transform.position.x > 4.45f)
                 {
                     speedXEnemy2 *= -1;
                 }
-                transform.Translate(speedXEnemy2 * Time.deltaTime, 0, 0);
+                transform.Translate(speedXEnemy2 * Time.deltaTime *-1, 0, 0);
                 break;
             }
         }
