@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Disparar()
     {
+        // Instancia una nueva bala en la posición y rotación actual del objeto.
         Instantiate(Bala, transform.position, transform.rotation);
     }
 }

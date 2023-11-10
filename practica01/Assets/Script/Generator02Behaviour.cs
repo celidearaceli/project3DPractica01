@@ -8,39 +8,44 @@ public class Generator02Behaviour : MonoBehaviour
     [SerializeField] private float initTime;
     [SerializeField] private float repeatTime;
    
-    private float speedZGenerator2 = 2f;
-    private int enemyCount = 0; // Contador de cubos generados
 
-    void Start()
+// Declaración de variables para la velocidad y cantidad de generación de enemigos
+private float speedZGenerator2 = 2f;
+private int enemyCount = 0;
+
+
+void Start()
+{
+    // Configuración de la invocación repetida del método EnemyGenerator
+    InvokeRepeating("EnemyGenerator", initTime, repeatTime);
+}
+
+// Método para generar enemigos
+public void EnemyGenerator()
+{
+    // Verificar si la cantidad de enemigos es menor que 5
+    if (enemyCount < 5)
     {
-        InvokeRepeating("EnemyGenerator", initTime, repeatTime);
+        // Instanciar un objeto enemigo e incrementar la cuenta
+        Instantiate(enemy02, transform.position, transform.rotation);
+        enemyCount++;
+    }
+}
+
+
+void Update()
+{
+    // Verificar si la posición en el eje Z está más allá de los límites especificados
+    if (transform.position.z < -4.23f || transform.position.z > 4.32f)
+    {
+        // Si está fuera de límites, invertir la dirección del movimiento
+        speedZGenerator2 *= -1;
     }
 
-    public void EnemyGenerator()
-    {
-        if (enemyCount < 5)  // Verificar si aún se pueden generar más cubos
-        {
-            Instantiate(enemy02, transform.position, transform.rotation);
-            enemyCount++;
-        }
-    }
-    void Update()
-    {
-        if(transform.position.z < -4.23f || transform.position.z > 4.32f)
-        {
-            speedZGenerator2 *= -1;
-        }
-        //normalizado en función del tiempo
-        transform.Translate( 0, 0,speedZGenerator2 * Time.deltaTime);
-    }
-     
-     
-       
-        
-          
-                
-           
-        
-        
+    // Mover el objeto en función de la velocidad de movimiento en el eje Z
+    transform.Translate(0, 0, speedZGenerator2 * Time.deltaTime);
+}
+
+    
     
 }
